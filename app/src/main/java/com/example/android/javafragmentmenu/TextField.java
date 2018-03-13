@@ -1,29 +1,42 @@
 package com.example.android.javafragmentmenu;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Display;
-import android.view.View;
-import android.widget.EditText;
 
-public class TextField extends AppCompatActivity{
-    public static final String EXTRA_MESSAGE = "com.example.android.javafragmentmenu.MESSAGE";
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+
+import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+
+public class TextField extends Fragment{
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.text_field);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.text_field,
+                container, false);
+        return view;
     }
 
-    public void sendMessage(View view){
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
-        EditText editText = findViewById(R.id.editText);
-        String message = editText.getText().toString();
+    public void onClick(){
+        Fragment newFragment = new Fragment();
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
 
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
+        newFragment.equals(new Counter());
+
+        transaction.replace(R.id.AppContent, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
+    public void showOtherFragment()
+    {
+        Fragment fr=new Fragment();
+        fr.equals(new Counter());
+        FragmentChangeListener fc=(FragmentChangeListener)getActivity();
+        fc.replaceFragment(fr);
+    }
 }

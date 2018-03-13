@@ -6,12 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class MenuFragment extends Fragment{
+public class Counter extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.menu_layout,
+        View view = inflater.inflate(R.layout.counter_button,
                 container, false);
         return view;
     }
 }
+
